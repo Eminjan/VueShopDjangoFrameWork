@@ -1,0 +1,2 @@
+# VueShopDjangoFrameWork
+前端Vue结合后端DjangoRestFramework的在线生鲜超市(前后端分离)
