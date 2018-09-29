@@ -7,7 +7,7 @@
 
 ```
 $ git clone https://github.com/Eminjan/VueShopDjangoFrameWork.git
-$ cd VueShop
+$ cd VueShopDjangoFrameWork
 $ pip install -r requirements.txt 
 $ python manage.py runserver
 ```
