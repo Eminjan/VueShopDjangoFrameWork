@@ -1,4 +1,5 @@
 # VueShopDjangoFrameWork
+![](https://img.shields.io/badge/language-Python-green.svg)
 😃前端Vue结合后端DjangoRestFramework的在线生鲜超市(前后端分离)
 
 
