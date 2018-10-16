@@ -11,7 +11,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 
 
-from .serializers import SmsSerializer
+from .serializers import SmsSerializer,UserRegSerializer
 from MxShop.settings import APIKEY
 from utils.yunpian import YunPian
 from .models import VerifyCode
@@ -79,3 +79,11 @@ class SmsCodeViewset(CreateModelMixin, viewsets.GenericViewSet):
             return Response({
                 "mobile": mobile
             }, status=status.HTTP_201_CREATED)
+
+
+class UserViewset(CreateModelMixin,viewsets.GenericViewSet):
+    """
+    用户
+    """
+    serializer_class = UserRegSerializer
+    queryset = User.objects.all()

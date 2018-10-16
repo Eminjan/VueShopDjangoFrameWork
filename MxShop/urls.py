@@ -19,7 +19,7 @@ from MxShop.settings import MEDIA_ROOT
 from django.views.static import serve
 from rest_framework.documentation import include_docs_urls
 from goods.views import GoodsListViewSet, CategoryViewSet,HotSearchsViewset
-from users.views import SmsCodeViewset
+from users.views import SmsCodeViewset,UserViewset
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
@@ -34,6 +34,8 @@ router.register(r'categorys', CategoryViewSet, base_name='categorys')
 router.register(r'codes', SmsCodeViewset, base_name='codes')
 
 router.register(r'hotsearchs', HotSearchsViewset, base_name='hotsearchs')
+
+router.register(r'users', UserViewset, base_name='users')
 
 good_list = GoodsListViewSet.as_view({
     'get': 'list',
