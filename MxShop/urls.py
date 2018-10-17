@@ -23,24 +23,27 @@ from users.views import SmsCodeViewset,UserViewset
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
+from user_operation.views import UserFavViewset
 
 router = DefaultRouter()
 
 # 配置goods url
 router.register(r'goods', GoodsListViewSet, base_name='goods')
 # 配置category的Url
-router.register(r'categorys', CategoryViewSet, base_name='categorys')
+router.register(r'categories', CategoryViewSet, base_name="categories")
 
 router.register(r'codes', SmsCodeViewset, base_name='codes')
 
-router.register(r'hotsearchs', HotSearchsViewset, base_name='hotsearchs')
+router.register(r'hotsearchs', HotSearchsViewset, base_name="hotsearchs")
 
 router.register(r'users', UserViewset, base_name='users')
+# 收藏
+router.register(r'userfavs', UserFavViewset, base_name='userfavs')
 
-good_list = GoodsListViewSet.as_view({
-    'get': 'list',
-
-})
+# good_list = GoodsListViewSet.as_view({
+#     'get': 'list',
+#
+# })
 
 urlpatterns = [
 
