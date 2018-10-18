@@ -18,13 +18,15 @@ import xadmin
 from MxShop.settings import MEDIA_ROOT
 from django.views.static import serve
 from rest_framework.documentation import include_docs_urls
-from goods.views import GoodsListViewSet, CategoryViewSet,HotSearchsViewset
-from users.views import SmsCodeViewset,UserViewset
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
+
+from users.views import SmsCodeViewset,UserViewset
 from user_operation.views import UserFavViewset
 from user_operation.views import LeavingMessageViewset,AddressViewset
+from goods.views import GoodsListViewSet, CategoryViewSet,HotSearchsViewset
+from trade.views import ShoppingCartViewset
 
 router = DefaultRouter()
 
@@ -44,6 +46,8 @@ router.register(r'userfavs', UserFavViewset, base_name='userfavs')
 router.register(r'messages', LeavingMessageViewset, base_name='messages')
 # 收货地址
 router.register(r'address', AddressViewset, base_name='address')
+# 购物车URL
+router.register(r'shopcarts', ShoppingCartViewset, base_name='shopcarts')
 
 good_list = GoodsListViewSet.as_view({
     'get': 'list',
