@@ -24,6 +24,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
 from user_operation.views import UserFavViewset
+from user_operation.views import LeavingMessageViewset
 
 router = DefaultRouter()
 
@@ -39,11 +40,13 @@ router.register(r'hotsearchs', HotSearchsViewset, base_name="hotsearchs")
 router.register(r'users', UserViewset, base_name='users')
 # 收藏
 router.register(r'userfavs', UserFavViewset, base_name='userfavs')
+# 留言
+router.register(r'messages', LeavingMessageViewset, base_name='messages')
 
-# good_list = GoodsListViewSet.as_view({
-#     'get': 'list',
-#
-# })
+good_list = GoodsListViewSet.as_view({
+    'get': 'list',
+
+})
 
 urlpatterns = [
 
