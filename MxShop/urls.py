@@ -53,6 +53,7 @@ urlpatterns = [
     url(r'^', include(router.urls)),
 
     url(r'docs/', include_docs_urls(title='在线超市')),
+
     url(r'^media/(?P<path>.*)$',serve,{"document_root":MEDIA_ROOT}),
 
     # drf自带的token认证模式

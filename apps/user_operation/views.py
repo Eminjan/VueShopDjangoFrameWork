@@ -14,13 +14,22 @@ from .serializers import UserFavSerializer
 # Create your views here.
 
 
-class UserFavViewset(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
+class UserFavViewset(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin,
+                     mixins.DestroyModelMixin):
     """
-    用户收藏功能
+    list:
+        获取用户收藏列表
+    retrieve:
+        判断某个商品是否已经收藏
+    create:
+        收藏商品
     """
+    # queryset = UserFav.objects.all()
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
     serializer_class = UserFavSerializer
-    authentication_classes = (JSONWebTokenAuthentication,SessionAuthentication)
-    lookup_field = "goods_id"
+    lookup_field = 'goods_id'
+
+    authentication_classes = (JSONWebTokenAuthentication, SessionAuthentication)
+
     def get_queryset(self):
-        return UserFav.objects.filter(user = self.request.user)
+        return UserFav.objects.filter(user=self.request.user)
