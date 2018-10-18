@@ -30,7 +30,7 @@ router = DefaultRouter()
 # 配置goods url
 router.register(r'goods', GoodsListViewSet, base_name='goods')
 # 配置category的Url
-router.register(r'categories', CategoryViewSet, base_name="categories")
+router.register(r'categorys', CategoryViewSet, base_name="categorys")
 
 router.register(r'codes', SmsCodeViewset, base_name='codes')
 
