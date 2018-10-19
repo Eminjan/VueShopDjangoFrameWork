@@ -22,11 +22,11 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
 
-from users.views import SmsCodeViewset,UserViewset
+from users.views import SmsCodeViewset, UserViewset
 from user_operation.views import UserFavViewset
-from user_operation.views import LeavingMessageViewset,AddressViewset
-from goods.views import GoodsListViewSet, CategoryViewSet,HotSearchsViewset
-from trade.views import ShoppingCartViewset
+from user_operation.views import LeavingMessageViewset, AddressViewset
+from goods.views import GoodsListViewSet, CategoryViewSet, HotSearchsViewset
+from trade.views import ShoppingCartViewset, OrderViewset
 
 router = DefaultRouter()
 
@@ -48,6 +48,8 @@ router.register(r'messages', LeavingMessageViewset, base_name='messages')
 router.register(r'address', AddressViewset, base_name='address')
 # 购物车URL
 router.register(r'shopcarts', ShoppingCartViewset, base_name='shopcarts')
+# 订单相关
+router.register(r'orders', OrderViewset, base_name='orders')
 
 good_list = GoodsListViewSet.as_view({
     'get': 'list',
@@ -63,7 +65,7 @@ urlpatterns = [
 
     url(r'docs/', include_docs_urls(title='在线超市')),
 
-    url(r'^media/(?P<path>.*)$',serve,{"document_root":MEDIA_ROOT}),
+    url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
 
     # drf自带的token认证模式
     url(r'^api-token-auth/', views.obtain_auth_token),
