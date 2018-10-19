@@ -56,6 +56,7 @@ good_list = GoodsListViewSet.as_view({
 
 })
 
+from trade.views import AlipayView
 urlpatterns = [
 
     url(r'^xadmin/', xadmin.site.urls),
@@ -71,5 +72,7 @@ urlpatterns = [
     url(r'^api-token-auth/', views.obtain_auth_token),
     # jwt的认证接口
     url(r'^login/', obtain_jwt_token),
+
+    url(r'^alipay/return', AlipayView.as_view(),name="alipay"),
 
 ]

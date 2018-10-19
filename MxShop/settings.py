@@ -28,7 +28,7 @@ SECRET_KEY = 'ro1@br_2l87zlg^v87)k-sbd-o%zk68(@$sm4ayjvb5(f-zecw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = 'users.UserProfile'
 # Application definition
@@ -95,8 +95,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'vueshop',
         'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
+        'PASSWORD': '123456',
+        'HOST': '132.232.209.153',
         "OPTIONS": {"init_command": "SET default_storage_engine=INNODB;"}
     }
 }
