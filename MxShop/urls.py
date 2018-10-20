@@ -57,12 +57,15 @@ good_list = GoodsListViewSet.as_view({
 })
 
 from trade.views import AlipayView
+from django.views.generic import TemplateView
 urlpatterns = [
 
     url(r'^xadmin/', xadmin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls')),
 
     url(r'^', include(router.urls)),
+
+    url(r'^index/', TemplateView.as_view(template_name="index.html"),name="index"),
 
     url(r'docs/', include_docs_urls(title='在线超市')),
 

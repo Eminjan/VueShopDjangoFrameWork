@@ -146,6 +146,10 @@ AUTEHNTICATION_BACKENDS = (
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,"static"),
+)
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 
@@ -174,3 +178,7 @@ REGEX_MOBILE = "^1[358]\d{9}$|^147\d{8}$|^176\d{8}$"
 
 # 云片网设置
 APIKEY = "dee0ae688dd65917f37911516afa6f54"
+
+# 支付宝相关配置
+private_key_path = os.path.join(BASE_DIR,'apps/trade/keys/private_2048.txt')
+ali_pub_key_path = os.path.join(BASE_DIR,'apps/trade/keys/alipay_key_2048.txt')

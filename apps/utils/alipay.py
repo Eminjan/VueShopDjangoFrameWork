@@ -145,9 +145,9 @@ if __name__ == "__main__":
 
     url = alipay.direct_pay(
         subject="测试订单2",
-        out_trade_no="20170202365",
+        out_trade_no="20170304375",
         total_amount=100,
-        return_url="http://127.0.0.1:8000/alipay/return/"
+        return_url="http://132.232.209.153:8000/alipay/return/"
     )
     re_url = "https://openapi.alipaydev.com/gateway.do?{data}".format(data=url)
 
