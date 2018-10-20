@@ -124,7 +124,7 @@ class AlipayView(APIView):
         sign = processed_dict.pop("sign", None)
 
         alipay = AliPay(
-            appid="####",
+            appid="2016091900544892",
             app_notify_url="http://132.232.209.153:8000/alipay/return/",
             app_private_key_path=private_key_path,
             alipay_public_key_path=ali_pub_key_path,  # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥,
@@ -145,7 +145,7 @@ class AlipayView(APIView):
                 existed_order.save()
 
             response = redirect("/index/#/app/home/member/order")
-
+            # response.set_cookie("nextPath","pay", max_age=2)
             return response
         else:
             response = redirect("index")
@@ -158,13 +158,13 @@ class AlipayView(APIView):
         :return:
         """
         processed_dict = {}
-        for key, value in request.GET.items():
+        for key, value in request.POST.items():
             processed_dict[key] = value
-        # 获取签名
+
         sign = processed_dict.pop("sign", None)
 
         alipay = AliPay(
-            appid="####",
+            appid="2016091900544892",
             app_notify_url="http://132.232.209.153:8000/alipay/return/",
             app_private_key_path=private_key_path,
             alipay_public_key_path=ali_pub_key_path,  # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥,
@@ -172,18 +172,16 @@ class AlipayView(APIView):
             return_url="http://132.232.209.153:8000/alipay/return/"
         )
 
-        # 进行验签，确保这是支付宝给我们的
-        verify_re = alipay.verify(processed_dict, sign)
+        verify_re = alipay.verify(processed_dict,sign)
 
-        # 如果验签成功
         if verify_re is True:
-            order_sn = processed_dict.get('out_trade_no', None)
-            trade_no = processed_dict.get('trade_no', None)
-            trade_status = processed_dict.get('trade_status', None)
+            order_sn = processed_dict.get('out_trade_no',None)
+            trade_no = processed_dict.get('trade_no',None)
+            trade_status = processed_dict.get('trade_status',None)
 
-            # 查询数据库中存在的订单
             existed_orders = OrderInfo.objects.filter(order_sn=order_sn)
             for existed_order in existed_orders:
+                # 订单商品项
                 order_goods = existed_order.goods.all()
                 # 商品销量增加订单中数值
                 for order_good in order_goods:
@@ -191,9 +189,11 @@ class AlipayView(APIView):
                     goods.sold_num += order_good.goods_num
                     goods.save()
 
+                # 更新订单状态，填充支付宝给的交易凭证号。
                 existed_order.pay_status = trade_status
                 existed_order.trade_no = trade_no
                 existed_order.pay_time = datetime.now()
                 existed_order.save()
-            # 将success返回给支付宝，支付宝就不会一直不停的继续发消息。
+
             return Response("success")
+

@@ -19,6 +19,7 @@ class AliPay(object):
     """
     支付宝支付接口
     """
+
     def __init__(self, appid, app_notify_url, app_private_key_path,
                  alipay_public_key_path, return_url, debug=False):
         self.appid = appid
@@ -32,7 +33,6 @@ class AliPay(object):
         self.alipay_public_key_path = alipay_public_key_path
         with open(self.alipay_public_key_path) as fp:
             self.alipay_public_key = RSA.import_key(fp.read())
-
 
         if debug is True:
             self.__gateway = "https://openapi.alipaydev.com/gateway.do"
@@ -123,32 +123,8 @@ class AliPay(object):
 
 
 if __name__ == "__main__":
-    return_url = 'http://127.0.0.1:8000/?total_amount=100.00&timestamp=2017-08-15+23%3A53%3A34&sign=e9E9UE0AxR84NK8TP1CicX6aZL8VQj68ylugWGHnM79zA7BKTIuxxkf%2FvhdDYz4XOLzNf9pTJxTDt8tTAAx%2FfUAJln4WAeZbacf1Gp4IzodcqU%2FsIc4z93xlfIZ7OLBoWW0kpKQ8AdOxrWBMXZck%2F1cffy4Ya2dWOYM6Pcdpd94CLNRPlH6kFsMCJCbhqvyJTflxdpVQ9kpH%2B%2Fhpqrqvm678vLwM%2B29LgqsLq0lojFWLe5ZGS1iFBdKiQI6wZiisBff%2BdAKT9Wcao3XeBUGigzUmVyEoVIcWJBH0Q8KTwz6IRC0S74FtfDWTafplUHlL%2Fnf6j%2FQd1y6Wcr2A5Kl6BQ%3D%3D&trade_no=2017081521001004340200204115&sign_type=RSA2&auth_app_id=2016080600180695&charset=utf-8&seller_id=2088102170208070&method=alipay.trade.page.pay.return&app_id=2016080600180695&out_trade_no=20170202185&version=1.0'
+    return_url = ''
     o = urlparse(return_url)
     query = parse_qs(o.query)
     processed_query = {}
     ali_sign = query.pop("sign")[0]
-
-
-    alipay = AliPay(
-        appid="2016091900544892",
-        app_notify_url="http://132.232.209.153:8000/alipay/return/",
-        app_private_key_path="../trade/keys/private_2048.txt",
-        alipay_public_key_path="../trade/keys/alipay_key_2048.txt",  # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥,
-        debug=True,  # 默认False,
-        return_url="http://132.232.209.153:8000/alipay/return/"
-    )
-
-    for key, value in query.items():
-        processed_query[key] = value[0]
-    print (alipay.verify(processed_query, ali_sign))
-
-    url = alipay.direct_pay(
-        subject="测试订单2",
-        out_trade_no="20170304375",
-        total_amount=100,
-        return_url="http://132.232.209.153:8000/alipay/return/"
-    )
-    re_url = "https://openapi.alipaydev.com/gateway.do?{data}".format(data=url)
-
-    print(re_url)
