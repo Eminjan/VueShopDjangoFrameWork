@@ -145,7 +145,6 @@ class AlipayView(APIView):
                 existed_order.save()
 
             response = redirect("/index/#/app/home/member/order")
-            # response.set_cookie("nextPath","pay", max_age=2)
             return response
         else:
             response = redirect("index")
@@ -181,9 +180,7 @@ class AlipayView(APIView):
 
             existed_orders = OrderInfo.objects.filter(order_sn=order_sn)
             for existed_order in existed_orders:
-                # 订单商品项
                 order_goods = existed_order.goods.all()
-                # 商品销量增加订单中数值
                 for order_good in order_goods:
                     goods = order_good.goods
                     goods.sold_num += order_good.goods_num
