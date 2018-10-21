@@ -27,6 +27,12 @@ class UserFavViewset(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.Crea
 
     def get_queryset(self):
         return UserFav.objects.filter(user=self.request.user)
+    # 收藏数新增
+    # def perform_create(self, serializer):
+    #     instance = serializer.save()
+    #     goods = instance.goods
+    #     goods.fav_num += 1
+    #     goods.save()
 
     # 设置动态serializer
     def get_serializer_class(self):

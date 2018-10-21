@@ -95,8 +95,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'vueshop',
         'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST': '132.232.209.153',
+        'PASSWORD': 'root',
+        'HOST': '127.0.0.1',
         "OPTIONS": {"init_command": "SET default_storage_engine=INNODB;"}
     }
 }

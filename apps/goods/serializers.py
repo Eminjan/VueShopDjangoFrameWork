@@ -72,10 +72,9 @@ class BrandSerializer(serializers.ModelSerializer):
 
 
 class IndexCategorySerializer(serializers.ModelSerializer):
-    # 首页系列商标一对多
     brands = BrandSerializer(many=True)
     goods = serializers.SerializerMethodField()
-    # 获取二级类
+    # 二级分类
     sub_cat = CategorySerializer2(many=True)
     ad_goods = serializers.SerializerMethodField()
 
@@ -102,3 +101,5 @@ class HotWordsSerializer(serializers.ModelSerializer):
     class Meta:
         model = HotSearchWords
         fields = "__all__"
+
+

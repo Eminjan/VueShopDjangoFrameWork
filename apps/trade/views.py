@@ -36,7 +36,6 @@ class ShoppingCartViewset(viewsets.ModelViewSet):
         goods.goods_num -= shop_cart.nums
         goods.save()
 
-    # 库存数+1
     def perform_destroy(self, instance):
         goods = instance.goods
         goods.goods_num += instance.nums
