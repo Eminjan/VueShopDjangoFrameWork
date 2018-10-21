@@ -173,6 +173,13 @@ JWT_AUTH ={
     'JWT_AUTH_HEADER_PREFIX': 'JWT',
 }
 
+REST_FRAMEWORK_EXTENSIONS = {
+    # 缓存时间
+    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60,
+    # 缓存存储
+    # 'DEFAULT_USE_CACHE': 'default',
+}
+
 # 手机号码正则表达式
 REGEX_MOBILE = "^1[358]\d{9}$|^147\d{8}$|^176\d{8}$"
 
@@ -182,3 +189,14 @@ APIKEY = "dee0ae688dd65917f37911516afa6f54"
 # 支付宝相关配置
 private_key_path = os.path.join(BASE_DIR,'apps/trade/keys/private_2048.txt')
 ali_pub_key_path = os.path.join(BASE_DIR,'apps/trade/keys/alipay_key_2048.txt')
+
+# 配置redis缓存
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
