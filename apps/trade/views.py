@@ -123,7 +123,7 @@ class AlipayView(APIView):
         sign = processed_dict.pop("sign", None)
 
         alipay = AliPay(
-            appid="2016091900544892",
+            appid="appid",
             app_notify_url="http://132.232.209.153:8000/alipay/return/",
             app_private_key_path=private_key_path,
             alipay_public_key_path=ali_pub_key_path,  # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥,
@@ -162,7 +162,7 @@ class AlipayView(APIView):
         sign = processed_dict.pop("sign", None)
 
         alipay = AliPay(
-            appid="2016091900544892",
+            appid="appid",
             app_notify_url="http://132.232.209.153:8000/alipay/return/",
             app_private_key_path=private_key_path,
             alipay_public_key_path=ali_pub_key_path,  # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥,
