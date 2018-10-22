@@ -26,9 +26,17 @@ sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))
 SECRET_KEY = 'ro1@br_2l87zlg^v87)k-sbd-o%zk68(@$sm4ayjvb5(f-zecw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
+
+AUTEHNTICATION_BACKENDS = (
+    'users.views.CustomBackend',
+    'social_core.backends.weibo.WeiboOAuth2',
+    'social_core.backends.qq.QQOAuth2',
+    'social_core.backends.weixin.WeixinOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 AUTH_USER_MODEL = 'users.UserProfile'
 # Application definition
@@ -50,7 +58,9 @@ INSTALLED_APPS = [
     'xadmin',
     'rest_framework',
     'corsheaders',
+    'social_django',
     'rest_framework.authtoken',
+
     ]
 
 MIDDLEWARE = [
@@ -79,11 +89,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
-
 WSGI_APPLICATION = 'MxShop.wsgi.application'
 
 
@@ -95,8 +106,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'vueshop',
         'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
+        'PASSWORD': '123456',
+        'HOST': '132.232.209.153',
         "OPTIONS": {"init_command": "SET default_storage_engine=INNODB;"}
     }
 }
@@ -136,9 +147,21 @@ USE_TZ = False
 
 
 
-AUTEHNTICATION_BACKENDS = (
-    'user.views.CustomBackend',
-)
+
+
+# 配置微博开放平台授权
+# SOCIAL_AUTH_要使用登录模块的名称大小_KEY，其他如QQ相同
+SOCIAL_AUTH_WEIBO_KEY = '4207750620'
+SOCIAL_AUTH_WEIBO_SECRET = '310bf5f4877331e363a2bdc56382b8ee'
+
+SOCIAL_AUTH_WEIXIN_KEY = '####'
+SOCIAL_AUTH_WEIXIN_SECRET = '#####'
+
+SOCIAL_AUTH_QQ_KEY = '####'
+SOCIAL_AUTH_QQ_SECRET = '#####'
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/index'
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -165,13 +188,14 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
+    # 限速配置
     'DEFAULT_THROTTLE_CLASSES': (
         'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle'
+        'rest_framework.throttling.UserRateThrottle',
         ),
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '2/minute',
-        'user': '3/minute'
+        'anon': '4/minute',
+        'user': '30/minute'
     }
 }
 
