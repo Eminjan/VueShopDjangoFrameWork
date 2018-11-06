@@ -26,17 +26,10 @@ sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))
 SECRET_KEY = 'ro1@br_2l87zlg^v87)k-sbd-o%zk68(@$sm4ayjvb5(f-zecw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-AUTEHNTICATION_BACKENDS = (
-    'users.views.CustomBackend',
-    'social_core.backends.weibo.WeiboOAuth2',
-    'social_core.backends.qq.QQOAuth2',
-    'social_core.backends.weixin.WeixinOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
 
 AUTH_USER_MODEL = 'users.UserProfile'
 # Application definition
@@ -106,8 +99,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'vueshop',
         'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST': '132.232.209.153',
+        'PASSWORD': 'root',
+        'HOST': '127.0.0.1',
         "OPTIONS": {"init_command": "SET default_storage_engine=INNODB;"}
     }
 }
@@ -147,7 +140,13 @@ USE_TZ = False
 
 
 
-
+AUTHENTICATION_BACKENDS = (
+    'users.views.CustomBackend',
+    'social_core.backends.weibo.WeiboOAuth2',
+    'social_core.backends.qq.QQOAuth2',
+    'social_core.backends.weixin.WeixinOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # 配置微博开放平台授权
 # SOCIAL_AUTH_要使用登录模块的名称大小_KEY，其他如QQ相同
@@ -160,7 +159,7 @@ SOCIAL_AUTH_WEIXIN_SECRET = '#####'
 SOCIAL_AUTH_QQ_KEY = '####'
 SOCIAL_AUTH_QQ_SECRET = '#####'
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/index'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
 
 
@@ -173,13 +172,14 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR,"static"),
 )
 
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-#     'PAGE_SIZE': 10,
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10,
+}
 
 
 REST_FRAMEWORK = {
@@ -194,8 +194,8 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.UserRateThrottle',
         ),
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '4/minute',
-        'user': '30/minute'
+        'anon': '10/minute',
+        'user': '90/minute'
     }
 }
 
