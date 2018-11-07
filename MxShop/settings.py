@@ -26,7 +26,7 @@ sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))
 SECRET_KEY = 'ro1@br_2l87zlg^v87)k-sbd-o%zk68(@$sm4ayjvb5(f-zecw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -99,8 +99,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'vueshop',
         'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
+        'PASSWORD': '123456',
+        'HOST': '132.232.109.153',
         "OPTIONS": {"init_command": "SET default_storage_engine=INNODB;"}
     }
 }
@@ -159,7 +159,7 @@ SOCIAL_AUTH_WEIXIN_SECRET = '#####'
 SOCIAL_AUTH_QQ_KEY = '####'
 SOCIAL_AUTH_QQ_SECRET = '#####'
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/index'
 
 
 
@@ -194,8 +194,8 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.UserRateThrottle',
         ),
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '10/minute',
-        'user': '90/minute'
+        'anon': '100/day',
+        'user': '1000/day'
     }
 }
 
