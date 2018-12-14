@@ -26,7 +26,7 @@ sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))
 SECRET_KEY = 'ro1@br_2l87zlg^v87)k-sbd-o%zk68(@$sm4ayjvb5(f-zecw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -100,7 +100,7 @@ DATABASES = {
         'NAME': 'vueshop',
         'USER': 'root',
         'PASSWORD': '123456',
-        'HOST': '132.232.109.153',
+        'HOST': '132.232.209.153',
         "OPTIONS": {"init_command": "SET default_storage_engine=INNODB;"}
     }
 }
@@ -150,8 +150,8 @@ AUTHENTICATION_BACKENDS = (
 
 # 配置微博开放平台授权
 # SOCIAL_AUTH_要使用登录模块的名称大小_KEY，其他如QQ相同
-SOCIAL_AUTH_WEIBO_KEY = '######'
-SOCIAL_AUTH_WEIBO_SECRET = '######'
+SOCIAL_AUTH_WEIBO_KEY = '4207750620'
+SOCIAL_AUTH_WEIBO_SECRET = '310bf5f4877331e363a2bdc56382b8ee'
 
 SOCIAL_AUTH_WEIXIN_KEY = '####'
 SOCIAL_AUTH_WEIXIN_SECRET = '#####'
