@@ -31,7 +31,7 @@ class GoodsListViewSet(CacheResponseMixin,mixins.ListModelMixin, mixins.Retrieve
     商品列表页,分页，搜索，过滤，排序
     """
     throttle_classes = (UserRateThrottle,AnonRateThrottle)
-    queryset = Goods.objects.all()
+    queryset = Goods.objects.get_queryset().order_by('id')
     serializer_class = GoodsSerializer
     pagination_class = GoodsPagination
     # authentication_classes = (TokenAuthentication,)
